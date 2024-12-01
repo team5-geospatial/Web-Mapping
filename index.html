@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB GIS</title>
+
+    <!-- Bootstrap 4.5.2 CSS (only one version) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap 4 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #343a40;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #007BFF;
+        }
+
+        /* Carousel Styling */
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            padding: 30px;
+            color: white;
+            text-align: center;
+            font-size: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .table-of-contents:hover {
+            background: linear-gradient(135deg, #0062cc, #004bb5);
+        }
+
+        .table-of-contents h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin: 15px 0;
+        }
+
+        .toc-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .toc-link i {
+            margin-right: 10px;
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .toc-link:hover {
+            color: #f39c12;
+            transform: scale(1.05);
+        }
+
+        .toc-link:hover i {
+            transform: translateX(5px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Section Styling */
+        .analysis-section {
+            padding: 50px 30px;
+            background-color: #f4f9fb;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+            text-align: center;
+        }
+
+   /* Styling for Image below Analysis Section 1 */
+.section-image {
+    width: 100%;  /* Use 100% to make the image responsive to the container */
+    height: 350px;  /* Adjust the height as needed */
+    object-fit: cover;  /* Ensures the image fills the space without distortion */
+    margin: 40px auto;  /* Adds margin to center the image */
+    display: block;
+}
+
+
+        .analysis-section:hover {
+            transform: translateY(-10px);
+            background-color: #eef6fc;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #0062cc;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Map Styling */
+        .map-container {
+            width: 100%;
+            height: 650px;
+            background-color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(45deg, #343a40, #007bff);
+            background-size: 400% 400%;
+            animation: gradientAnimation 5s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Social Media Icons in Footer */
+        footer a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #f39c12;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #007bff;
+            border-radius: 10px;
+        }
+
+        /* Styling for Image below Analysis Section 1 */
+        .section-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">WEB GIS</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#home"></a></li>
+                <li class="nav-item"><a class="nav-link" href="#about"></a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects"></a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Carousel Header -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="1.jpg" class="d-block w-100" alt="First Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="2.jpg" class="d-block w-100" alt="Second Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="3.jpg" class="d-block w-100" alt="Third Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="4.jpg" class="d-block w-100" alt="Fourth Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="5.jpg" class="d-block w-100" alt="Fifth Slide">
+            </div>
+        </div>
+    </div>
+
+    <!-- Table of Contents Section -->
+    <section class="table-of-contents">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+            <li><a href="#Analysis_Section_1" class="toc-link"><i class="bi bi-map"></i>STORY MAP</a></li>
+            <li><a href="#Analysis_Section_2" class="toc-link"><i class="bi bi-globe"></i>INTERACTIVE MAPPING</a></li>
+            <li><a href="#Analysis_Section_3" class="toc-link"><i class="bi bi-map"></i>STORY MAP</a></li>
+            <li><a href="#Analysis_Section_4" class="toc-link"><i class="bi bi-bar-chart"></i>DASHBOARD</a></li>
+        </ul>
+    </section>
+
+
+    <!-- 1 Analysis Section -->
+ <div class="analysis-section" id="Analysis_Section_1">
+    <h2 class="section-title">STORY MAP</h2>
+    <div class="map-container">
+        <!-- Embed the second map using iframe -->
+        <iframe src="https://uploads.knightlab.com/storymapjs/482bd3605b183dc522d8a2b47ba284ba/chennai/index.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+        <a href="https://uploads.knightlab.com/storymapjs/482bd3605b183dc522d8a2b47ba284ba/chennai/index.html" class="btn btn-primary btn-lg">Explore</a>
+    </div>
+</div>
+
+   
+
+ <!-- 2 Analysis Section -->
+ <div class="analysis-section" id="Analysis_Section_2">
+    <h2 class="section-title">INTERACTIVE MAPPING</h2>
+    <div class="map-container">
+        <!-- Embed the second map using iframe -->
+        <iframe src="https://mdjahid07.github.io/TAKI-INFORMATION-SYSTEM2/#14/22.5924/88.9280" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+        <a href="https://mdjahid07.github.io/TAKI-INFORMATION-SYSTEM2/#14/22.5924/88.9280" class="btn btn-primary btn-lg">Explore</a>
+    </div>
+</div>
+
+
+ <!-- Analysis Section 3 -->
+ <section id="Analysis_Section_3" class="analysis-section">
+    <div class="section-title">STORY MAP</div>
+   
+    <!-- Image Added Below the Section -->
+    <img src="Story map.png" alt="Analysis Image" class="section-image">
+
+    <a href="https://earth.google.com/earth/d/1Q75nWcIXySXYYD2TDwcr-ElhUDoqmD0o?usp=sharing" class="btn btn-primary btn-lg">Open in Google Earth</a>
+</section>
+
+
+
+<!-- Analysis Section 4 -->
+<section id="Analysis_Section_4" class="analysis-section">
+    <div class="section-title">DASHBOARD</div>
+   
+    <!-- Image Added Below the Section -->
+    <img src="Screenshot 2024-11-30 185456.png" alt="Analysis Image" class="section-image">
+
+    <a href="https://lookerstudio.google.com/reporting/db639d71-303a-48c7-9b15-3890eef81424" class="btn btn-primary btn-lg">Open in Looker Studio</a>
+</section>
+
+    
+
+    <!-- Footer -->
+   <footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <div class="container p-4 pb-0">
+        <section class="mb-4">
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="https://www.facebook.com/profile.php?id=100034128758648" role="button"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="https://x.com/md_jahid86731" role="button"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;" href="mailto:mdjahid.ac.in@gmail.com" role="button">
+                <i class="fas fa-envelope"></i></a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;" href="https://www.instagram.com/superjahid/" role="button"><i class="fab fa-instagram"></i></a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #0077b5;" href="https://www.linkedin.com/in/md-jahid-221891292/" role="button"><i class="fab fa-linkedin-in"></i></a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/mdjahid07" role="button"><i class="fab fa-github"></i></a>
+        </section>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2024 All Right Reserved
+    </div>
+</footer>
+</body>
+</html>
